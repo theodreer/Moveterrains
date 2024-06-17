@@ -1,9 +1,9 @@
 using UnityEngine;
 
-public class MoveTerrains : MonoBehaviour
+public class MoveTerrains2 : MonoBehaviour
 {
     public float scrollSpeed = 50.0f; // Velocidade do movimento
-    public Terrain[] terrains; // Array para armazenar os três terrenos
+    public Terrain[] terrains; // Array para armazenar os trÃªs terrenos
     private float terrainLength; // Comprimento do terreno ao longo do eixo z
 
     void Start()
@@ -20,12 +20,12 @@ public class MoveTerrains : MonoBehaviour
 
     void Update()
     {
-        // Move cada terreno para trás no eixo negativo z
+        // Move cada terreno para trÃ¡s no eixo negativo z
         foreach (Terrain terrain in terrains)
         {
             terrain.transform.position += Vector3.back * scrollSpeed * Time.deltaTime;
 
-            // Reposiciona o terreno se ele sair da área visível
+            // Reposiciona o terreno se ele sair da Ã¡rea visÃ­vel
             if (terrain.transform.position.z < -terrainLength)
             {
                 RepositionTerrain(terrain);
@@ -35,7 +35,7 @@ public class MoveTerrains : MonoBehaviour
 
     void RepositionTerrain(Terrain terrain)
     {
-        // Encontra o terreno mais à frente
+        // Encontra o terreno mais Ã  frente
         Terrain frontTerrain = terrains[0];
         foreach (Terrain t in terrains)
         {
@@ -45,11 +45,12 @@ public class MoveTerrains : MonoBehaviour
             }
         }
 
-        // Reposiciona o terreno para logo à frente do terreno mais à frente
+        // Reposiciona o terreno para logo Ã  frente do terreno mais Ã  frente, com decremento de 100 na posiÃ§Ã£o z
+        // A SubtraÃ§Ã£o de 100 se dÃ¡ pelo fato de que sem ela buracos sÃ£o criados entre cada terreno
         terrain.transform.position = new Vector3(
             terrain.transform.position.x,
             terrain.transform.position.y,
-            frontTerrain.transform.position.z + terrainLength
+            frontTerrain.transform.position.z + terrainLength - 25
         );
     }
 }
